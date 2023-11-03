@@ -11,9 +11,9 @@ public static class ModalParametersExtensions
     {
         return param.Add(nameof(SimpleModal.Message), caller.ContentSize switch
         {
-            ModalContentSize.Small => caller._smallContent,
-            ModalContentSize.Normal => caller._normalContent,
-            ModalContentSize.Huge => caller._hugeContent,
+            ModalContentSize.Small => caller.SmallContent,
+            ModalContentSize.Normal => caller.NormalContent,
+            ModalContentSize.Huge => caller.HugeContent,
             _ => throw new ArgumentOutOfRangeException($"unrecognized value for ContentSize: [{caller.ContentSize}]")
         });
     }
