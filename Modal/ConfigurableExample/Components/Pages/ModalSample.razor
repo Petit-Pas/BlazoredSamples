@@ -6,15 +6,17 @@
 
 <button @onclick="ShowModal"> Show modal </button>
 
-<br />
-<br />
+<div class="row">
+    <div class="col-2">
+        <h3> Content Size </h3>
+        <InputRadioGroup Name="ContentSize" @bind-Value="@ContentSize">
+            <InputRadio Name="ContentSize" Value="ModalContentSize.Small" /> small content <br />
+            <InputRadio Name="ContentSize" Value="ModalContentSize.Normal" /> normal content <br />
+            <InputRadio Name="ContentSize" Value="ModalContentSize.Huge" /> huge content <br />
+        </InputRadioGroup>
+    </div>
+</div>
 
-<h3> Content Size </h3>
-<InputRadioGroup Name="ContentSize" @bind-Value="@ContentSize">
-    <InputRadio Name="ContentSize" Value="ModalContentSize.Small" /> small content <br />
-    <InputRadio Name="ContentSize" Value="ModalContentSize.Normal" /> normal content <br />
-    <InputRadio Name="ContentSize" Value="ModalContentSize.Huge" /> huge content <br />
-</InputRadioGroup>
 @code {
 
     [CascadingParameter]
