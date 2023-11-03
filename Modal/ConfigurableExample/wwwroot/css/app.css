@@ -103,6 +103,10 @@ code {
 }
 
 
+/* These 2 classes cannot be defined in in place css files because they are used as parameter and sent to other components.
+    So those classes need to be known broadly over your application
+*/
+
 /* without the important here, the margin-left gets overriden by the default style of the modal */
 .custom-modal-width {
     max-width: 99%;
