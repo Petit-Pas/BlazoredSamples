@@ -102,8 +102,7 @@ code {
     color: #c02d76;
 }
 
-
-/* These 2 classes cannot be defined in in place css files because they are used as parameter and sent to other components.
+/* These following classes cannot be defined in in place css files because they are used as parameter and sent to other components.
     So those classes need to be known broadly over your application
 */
 
