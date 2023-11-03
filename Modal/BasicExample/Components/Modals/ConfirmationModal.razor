@@ -1,0 +1,24 @@
+﻿
+<p> Message </p>
+
+<button @onclick="() => Yes()"> Yes </button>
+<button @onclick="() => No()"> No </button>
+
+@code {
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    [Parameter]
+    public string Message { get; set; }
+
+    private async Task Yes()
+    {
+        await BlazoredModal.CloseAsync(ModalResult.Ok(/* Some values can be returned here when needed */));
+    }
+
+    private async Task No()
+    {
+        await BlazoredModal.CloseAsync(ModalResult.Cancel());
+    }
+
+}

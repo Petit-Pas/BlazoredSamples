@@ -9,10 +9,26 @@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
+    [CascadingParameter]
+    public IModalService Modal { get; set; } = default!;
+
     private int currentCount = 0;
 
-    private void IncrementCount()
+    private async void IncrementCount()
     {
-        currentCount++;
+        var modalParameters = new ModalParameters()
+            .Add(nameof(ConfirmationModal.Message), $"Are you sure you want to increment the counter from {currentCount} to {currentCount + 1}");
+        var modal = Modal.Show<ConfirmationModal>("Please confirm.", modalParameters);
+
+        var result = await modal.Result;
+
+        if (result.Confirmed)
+        {
+            currentCount++;
+        }
+
+        // Some data can be gathered from result.Data when needed.
+
+        StateHasChanged();
     }
 }
