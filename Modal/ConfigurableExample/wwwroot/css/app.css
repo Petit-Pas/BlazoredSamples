@@ -101,3 +101,19 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+
+/* without the important here, the margin-left gets overriden by the default style of the modal */
+.custom-modal-width {
+    max-width: 99%;
+    margin-left: auto !important; 
+    margin-right: auto !important;
+}
+/* the custom-modal-position is applied on a parent div, 
+    so its important to add the .blazored-modal class name here to make sure its applied on the proper thing */
+.custom-modal-position .blazored-modal { 
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
