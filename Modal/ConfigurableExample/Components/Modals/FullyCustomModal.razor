@@ -1,0 +1,49 @@
+﻿<div class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-backdrop fade show" @onclick="Cancel"></div>
+    <div class="modal-dialog" style="z-index: 1050">
+        <!-- Pop it above the backdrop -->
+        <div class="modal-content">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @onclick="Close">Close</button>
+            </div>
+            <div class="modal-body">
+                @if (BlazoredModalInstance.Options.Position == null)
+                {
+                    <p>NULL</p>
+                }
+                <h5> position should be: @BlazoredModalInstance.Options.Position.ToString() </h5>
+                <p>@Message</p>
+            </div>
+            <div class="modal-header">
+                <h5 class="modal-title">@BlazoredModalInstance.Title</h5>
+                <button type="button" class="close" aria-label="Close" @onclick="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button type="button" class="close" aria-label="Close" @onclick="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button type="button" class="close" aria-label="Close" @onclick="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button type="button" class="close" aria-label="Close" @onclick="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    // When using custom layout, if you want to reimplement part of the functionalities of the configuration (position, size, header config, etc)
+    // You can access the configuration variables just the way you would normally using this approach
+    // BlazoredModalInstance will be a cascading parameter fully populated with its according data, even though you are not displaying them per se.
+    // You can even use this to access the Title property of the ModalInstance which is provided by client code on the Show() method as 1st parameter
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModalInstance { get; set; } = default!;
+
+    [Parameter] 
+    public string? Message { get; set; }
+
+    private async Task Close() => await BlazoredModalInstance.CloseAsync(ModalResult.Ok(true));
+    private async Task Cancel() => await BlazoredModalInstance.CancelAsync();
+}
