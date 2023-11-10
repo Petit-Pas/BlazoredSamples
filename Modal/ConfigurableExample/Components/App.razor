@@ -1,4 +1,5 @@
 ﻿<CascadingBlazoredModal>
+@* Everything can be configured by default at this level as such: <CascadingBlazoredModal Size="ModalSize.Large", then when needed: SizeCustomClass="custom-css-class">*@
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
