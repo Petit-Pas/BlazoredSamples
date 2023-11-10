@@ -1,0 +1,63 @@
+﻿@page "/"
+
+<PageTitle> Configure Blazored Toast </PageTitle>
+
+<button @onclick="ShowToast"> Show toast </button>
+
+<div class="row">
+    <div class="col-2">
+        <h3> Content Size </h3>
+        <InputRadioGroup Name="ToastType" @bind-Value="@ToastType">
+            <InputRadio Name="ToastType" Value="ToastTypes.Info" /> Info <br />
+            <InputRadio Name="ToastType" Value="ToastTypes.Success" /> Success <br />
+            <InputRadio Name="ToastType" Value="ToastTypes.Warning" /> Warning <br />
+            <InputRadio Name="ToastType" Value="ToastTypes.Error" /> Error <br />
+        </InputRadioGroup>
+    </div>
+</div>
+
+@code {
+
+    [Inject]
+    public IToastService ToastService { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    private string ToastMessage { get; set; } = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.";
+
+    private void ShowToast()
+    {
+        switch (ToastType)
+        {
+            case ToastTypes.Info:
+                ToastService.ShowInfo(ToastMessage);
+                break;
+            case ToastTypes.Success:
+                ToastService.ShowSuccess(ToastMessage);
+                break;
+            case ToastTypes.Warning:
+                ToastService.ShowWarning(ToastMessage);
+                break;
+            case ToastTypes.Error:
+                ToastService.ShowError(ToastMessage);
+                break;
+            case ToastTypes.Custom:
+                throw new NotImplementedException();
+                break;
+
+        }
+    }
+
+    private ToastTypes ToastType { get; set; } = ToastTypes.Info;
+
+    public enum ToastTypes
+    {
+        Info,
+        Success,
+        Warning,
+        Error, 
+        Custom
+    }
+
+}

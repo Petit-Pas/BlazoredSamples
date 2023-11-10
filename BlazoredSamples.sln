@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurableExample", "Moda
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toast", "Toast", "{6221857E-E1D3-4D7D-9AEA-50FD7B5B113F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicExample", "Toast\BasicExample\BasicExample.csproj", "{D06832DF-8FD5-4BF1-A9E8-1462249AC7C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicExample", "Toast\BasicExample\BasicExample.csproj", "{D06832DF-8FD5-4BF1-A9E8-1462249AC7C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurableExample", "Toast\ConfigurableExample\ConfigurableExample.csproj", "{4A26F822-B290-44B9-9D0D-D60D707AC3E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{D06832DF-8FD5-4BF1-A9E8-1462249AC7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D06832DF-8FD5-4BF1-A9E8-1462249AC7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D06832DF-8FD5-4BF1-A9E8-1462249AC7C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A26F822-B290-44B9-9D0D-D60D707AC3E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A26F822-B290-44B9-9D0D-D60D707AC3E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A26F822-B290-44B9-9D0D-D60D707AC3E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A26F822-B290-44B9-9D0D-D60D707AC3E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{60B1B493-26A6-455D-B1FE-507ED43BB298} = {4DD97C11-6E75-4CA3-9259-2C4C1B1E5D8E}
 		{5B4456FA-CB79-4942-8170-EB033291CBB7} = {4DD97C11-6E75-4CA3-9259-2C4C1B1E5D8E}
 		{D06832DF-8FD5-4BF1-A9E8-1462249AC7C6} = {6221857E-E1D3-4D7D-9AEA-50FD7B5B113F}
+		{4A26F822-B290-44B9-9D0D-D60D707AC3E2} = {6221857E-E1D3-4D7D-9AEA-50FD7B5B113F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E14A466F-761B-4CB1-89D2-2CE310BFC2B4}
