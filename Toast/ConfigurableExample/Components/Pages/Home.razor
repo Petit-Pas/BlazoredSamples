@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using Blazored.Toast.Configuration
+@using ConfigurableExample.Extensions
 
 <PageTitle> Configure Blazored Toast </PageTitle>
 
@@ -6,7 +8,7 @@
 
 <div class="row">
     <div class="col-2">
-        <h3> Content Size </h3>
+        <h3> Toast type </h3>
         <InputRadioGroup Name="ToastType" @bind-Value="@ToastType">
             <InputRadio Name="ToastType" Value="ToastTypes.Info" /> Info <br />
             <InputRadio Name="ToastType" Value="ToastTypes.Success" /> Success <br />
@@ -14,6 +16,92 @@
             <InputRadio Name="ToastType" Value="ToastTypes.Error" /> Error <br />
         </InputRadioGroup>
     </div>
+
+    <div class="col-2">
+        <h3> Position </h3>
+        <InputRadioGroup Name="Position" @bind-Value="@Position">
+            <InputRadio Name="Position" Value="ToastPositions.Default" /> Default (configured at root as BottomCenter) <br />
+            <InputRadio Name="Position" Value="ToastPositions.TopLeft" /> TopLeft <br />
+            <InputRadio Name="Position" Value="ToastPositions.TopCenter" /> TopCenter <br />
+            <InputRadio Name="Position" Value="ToastPositions.TopRight" /> TopRight <br />
+            <InputRadio Name="Position" Value="ToastPositions.BottomLeft" /> BottomLeft <br />
+            <InputRadio Name="Position" Value="ToastPositions.BottomCenter" /> BottomCenter <br />
+            <InputRadio Name="Position" Value="ToastPositions.BottomRight" /> BottomRight <br />
+        </InputRadioGroup>
+    </div>
+
+
+    <div class="col-2">
+        <h3> Timeout Enabled </h3>
+        <InputRadioGroup Name="TimeoutEnabled" @bind-Value="@DisableTimeout">
+            <InputRadio Name="TimeoutEnabled" Value="true" /> no <br />
+            <InputRadio Name="TimeoutEnabled" Value="false" /> yes (default) <br />
+        </InputRadioGroup>
+    </div>
+
+    <div class="col-2">
+        <h3> Timeout Duration </h3>
+        <InputRadioGroup Name="TimeoutDuration" @bind-Value="@TimeoutDuration">
+            <InputRadio Name="TimeoutDuration" Value="2" /> 2 <br />
+            <InputRadio Name="TimeoutDuration" Value="5" /> 5 (default) <br />
+            <InputRadio Name="TimeoutDuration" Value="10" /> 10 <br />
+            <InputRadio Name="TimeoutDuration" Value="20" /> 20 <br />
+        </InputRadioGroup>
+    </div>
+
+    <div class="col-2">
+        <h3> Should Pause timer on hover </h3>
+        <InputRadioGroup Name="TimeoutPauseOnHover" @bind-Value="@PausesTimeoutOnMouseOver">
+            <InputRadio Name="TimeoutPauseOnHover" Value="true" /> yes <br />
+            <InputRadio Name="TimeoutPauseOnHover" Value="false" /> no (default) <br />
+        </InputRadioGroup>
+    </div>
+
+    <div class="col-2">
+        <h3> Different value for timeout after it has been paused </h3>
+        <InputRadioGroup Name="TimeoutExtendedDuration" @bind-Value="@ExtendedTimeout">
+            <InputRadio Name="TimeoutExtendedDuration" Value="0" /> keep the same (default) <br />
+            <InputRadio Name="TimeoutExtendedDuration" Value="2" /> 2 <br />
+            <InputRadio Name="TimeoutExtendedDuration" Value="5" /> 5 <br />
+            <InputRadio Name="TimeoutExtendedDuration" Value="10" /> 10 <br />
+        </InputRadioGroup>
+    </div>
+
+    <div class="col-2">
+        <h3> Show progress bar  </h3>
+        <InputRadioGroup Name="ShowProgressBar" @bind-Value="@ShowProgressBar">
+            <InputRadio Name="ShowProgressBar" Value="false" /> no (default) <br />
+            <InputRadio Name="ShowProgressBar" Value="true" /> yes <br />
+        </InputRadioGroup>
+    </div>
+
+    <div class="col-2">
+        <h3> Show close button </h3>
+        <InputRadioGroup Name="ShowCloseButton" @bind-Value="@ShowCloseButton">
+            <InputRadio Name="ShowCloseButton" Value="false" /> no <br />
+            <InputRadio Name="ShowCloseButton" Value="true" /> yes (default) <br />
+        </InputRadioGroup>
+    </div>
+
+    <div class="col-2">
+        <h3> Icon Type </h3>
+        <InputRadioGroup Name="IconType" @bind-Value="@Icon">
+            <InputRadio Name="IconType" Value="IconType.Default" /> default <br />
+            <InputRadio Name="IconType" Value="IconType.None" /> none <br />
+            <InputRadio Name="IconType" Value="IconType.MaterialInfo" /> Material Info <br />
+            <InputRadio Name="IconType" Value="IconType.MaterialSuccess" /> Material Success <br />
+            <InputRadio Name="IconType" Value="IconType.MaterialWarning" /> Material Warning <br />
+            <InputRadio Name="IconType" Value="IconType.MaterialError" /> Material Error <br />
+        </InputRadioGroup>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <i class="material-icons">priority_high</i>
+
+    <div> At the time I'm writing this sample, the configuration of the ShowProgressBar and ShowCloseButton can only be done as general settings, this is a bug that has already been solved by Chris Sainty but he's waiting for more content to release a new version. See: https://github.com/Blazored/Toast/issues/241 </div>
+
 </div>
 
 @code {
@@ -26,21 +114,30 @@
 
     private string ToastMessage { get; set; } = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.";
 
+    private void ConfigureSettings(ToastSettings settings)
+    {
+        settings
+            .ConfigureTimeout(DisableTimeout, TimeoutDuration, PausesTimeoutOnMouseOver, ExtendedTimeout)
+            .ConfigurePosition(Position)
+            .ConfigureLayout(ShowProgressBar, ShowCloseButton)
+            .ConfigureIcon(Icon);
+    }
+
     private void ShowToast()
     {
         switch (ToastType)
         {
             case ToastTypes.Info:
-                ToastService.ShowInfo(ToastMessage);
+                ToastService.ShowInfo(ToastMessage, ConfigureSettings);
                 break;
             case ToastTypes.Success:
-                ToastService.ShowSuccess(ToastMessage);
+                ToastService.ShowSuccess(ToastMessage, ConfigureSettings);
                 break;
             case ToastTypes.Warning:
-                ToastService.ShowWarning(ToastMessage);
+                ToastService.ShowWarning(ToastMessage, ConfigureSettings);
                 break;
             case ToastTypes.Error:
-                ToastService.ShowError(ToastMessage);
+                ToastService.ShowError(ToastMessage, ConfigureSettings);
                 break;
             case ToastTypes.Custom:
                 throw new NotImplementedException();
@@ -60,4 +157,51 @@
         Custom
     }
 
+    // This can also be configured by default in the main <ToastServices> balise, check MainLayout.razor for an example.
+    public ToastPositions Position { get; set; } = ToastPositions.Default;
+
+    public enum ToastPositions
+    {
+        Default,
+        TopLeft,
+        TopRight,
+        TopCenter,
+        BottomLeft,
+        BottomRight,
+        BottomCenter
+    }
+
+    #region Timeout
+
+    // These can also be configured by default in the main <ToastServices> balise, check MainLayout.razor for an example.
+    public bool DisableTimeout { get; set; } = false;
+    public bool PausesTimeoutOnMouseOver { get; set; } = false;
+    public int TimeoutDuration { get; set; } = 5;
+    public int ExtendedTimeout { get; set; } = 0;
+
+    #endregion Timeout
+
+    #region Layout 
+
+    // These can also be configured by default in the main <ToastServices> balise, check MainLayout.razor for an example.
+    public bool ShowProgressBar { get; set; } = false;
+    public bool ShowCloseButton { get; set; } = true;
+
+    #endregion Layout
+
+    #region icon 
+
+    public enum IconType
+    {
+        Default,
+        None,
+        MaterialInfo,
+        MaterialSuccess,
+        MaterialWarning,
+        MaterialError
+    }
+
+    public IconType Icon { get; set; } = IconType.Default;
+
+    #endregion icon
 }
