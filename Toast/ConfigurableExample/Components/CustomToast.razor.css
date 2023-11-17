@@ -1,0 +1,9 @@
+﻿.custom-toast {
+    padding: 1em;
+    background-color: lightblue;
+    border-top: none;
+}
+
+.custom-toast-header {
+    font-size: 26px;
+}

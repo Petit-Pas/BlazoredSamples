@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toast", "Toast", "{6221857E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicExample", "Toast\BasicExample\BasicExample.csproj", "{D06832DF-8FD5-4BF1-A9E8-1462249AC7C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurableExample", "Toast\ConfigurableExample\ConfigurableExample.csproj", "{4A26F822-B290-44B9-9D0D-D60D707AC3E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurableExample", "Toast\ConfigurableExample\ConfigurableExample.csproj", "{4A26F822-B290-44B9-9D0D-D60D707AC3E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

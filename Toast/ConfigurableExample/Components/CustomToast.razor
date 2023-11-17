@@ -1,0 +1,25 @@
+﻿
+<div class="custom-toast">
+    <div class="custom-toast-header">
+        <p>
+            Toast title
+        </p>
+    </div>
+    <div class="custom-toast-body">
+        <p> parameter says its a @Type toast </p>
+        <button @onclick=Close> Close </button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Type { get; set; }
+
+    [CascadingParameter] 
+    private BlazoredToast ToastInstance { get; set; } = default!;
+
+    private void Close()
+    {
+        ToastInstance.Close();
+    }
+}

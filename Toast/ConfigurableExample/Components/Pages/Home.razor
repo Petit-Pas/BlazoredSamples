@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Blazored.Toast.Configuration
 
 <PageTitle> Configure Blazored Toast </PageTitle>
 
@@ -28,25 +29,17 @@
 
     private void ShowToast()
     {
-        switch (ToastType)
-        {
-            case ToastTypes.Info:
-                ToastService.ShowInfo(ToastMessage);
-                break;
-            case ToastTypes.Success:
-                ToastService.ShowSuccess(ToastMessage);
-                break;
-            case ToastTypes.Warning:
-                ToastService.ShowWarning(ToastMessage);
-                break;
-            case ToastTypes.Error:
-                ToastService.ShowError(ToastMessage);
-                break;
-            case ToastTypes.Custom:
-                throw new NotImplementedException();
-                break;
+        var toastParams = new ToastParameters();
 
-        }
+        toastParams.Add(nameof(CustomToast.Type), ToastType switch
+        {
+            ToastTypes.Info => "Info",
+            ToastTypes.Success => "Success",
+            ToastTypes.Warning => "Warning",
+            ToastTypes.Error => "Error",
+        });
+
+        ToastService.ShowToast<CustomToast>(toastParams, service => service.DisableTimeout = true);
     }
 
     private ToastTypes ToastType { get; set; } = ToastTypes.Info;
@@ -57,7 +50,6 @@
         Success,
         Warning,
         Error, 
-        Custom
     }
 
 }
