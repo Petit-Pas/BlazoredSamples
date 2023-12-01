@@ -1,0 +1,55 @@
+﻿@page "/"
+@using BasicExample.Models
+
+@if (_editContext != null)
+{
+    
+    <EditForm EditContext="_editContext">
+
+        <ValidationSummary />
+
+        <label> First Name </label>
+        <InputText @bind-Value=_person.FirstName />
+        <ValidationMessage For="() => _person.FirstName" />
+        <label> Last Name </label>
+        <InputText @bind-Value=_person.LastName />
+        <ValidationMessage For="() => _person.LastName" />
+
+        <br />
+        <br />
+
+        <label> Age </label>
+        <InputNumber @bind-Value=_person.Age />
+        <ValidationMessage For="() => _person.Age" />
+
+        <br />
+        <br />
+
+        <label> Street name </label>
+        <InputText @bind-Value=_person.Address.StreetName />
+        <ValidationMessage For="() => _person.Address.StreetName" />
+        <label> Number </label>
+        <InputNumber @bind-Value=_person.Address.StreetNumber />
+        <ValidationMessage For="() => _person.Address.StreetNumber" />
+
+        <br />
+        <br />
+
+        <button @onclick="() => _editContext.Validate()"> Validate </button>
+    </EditForm>
+
+}
+
+@code {
+    private EditContext? _editContext = null;
+    private Person _person = new Person();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _editContext = new EditContext(_person);
+        StateHasChanged();
+    }
+
+}
